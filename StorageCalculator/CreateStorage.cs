@@ -25,7 +25,6 @@ namespace StorageCalculator
         private void BTNcrear_Click(object sender, EventArgs e)
         {
             Storage storage = new Storage(TXTname.Text, (int)NUDlinealCapacity.Value);
-            StorageManager m = new StorageManager(storage);
 
             using (SqlConnection conn = new SqlConnection(DBconnection))
             {
@@ -39,6 +38,8 @@ namespace StorageCalculator
                 cmd.ExecuteNonQuery();
             }
 
+            StorageManager m = new StorageManager(storage);
+            m.Text = storage.Name;
             m.MdiParent = this.MdiParent;
             m.Show();
             this.Close();

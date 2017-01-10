@@ -10,3 +10,6 @@ c:\users\dthpse15\documents\visual studio 2013\Projects\StorageCalculator\Storag
 C:\Users\DTHPSE15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.CreateStorage.resources
 C:\Users\DTHPSE15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.StorageManager.resources
 C:\Users\DTHPSE15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.EditStorage.resources
+C:\Users\DTHPSE15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\bin\Debug\Local.mdf
+C:\Users\DTHPSE15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\bin\Debug\Local_log.ldf
+C:\Users\DTHPSE15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.Lista.resources

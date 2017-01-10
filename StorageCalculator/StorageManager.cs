@@ -14,6 +14,7 @@ namespace StorageCalculator
     {
 
         Storage storage;
+        DataTable dt;
 
         public StorageManager(Storage s)
         {
@@ -25,7 +26,11 @@ namespace StorageCalculator
 
         private void StorageManager_Load(object sender, EventArgs e)
         {
-            
+            dt = new DataTable();
+            dt.Columns.Add("Nombre");
+            dt.Columns.Add("Capacidad ocupada");
+            dt.Columns.Add("Capacidad total");
+
         }
     }
 }

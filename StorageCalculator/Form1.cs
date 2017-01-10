@@ -25,5 +25,12 @@ namespace StorageCalculator
             ns.MdiParent = this;
             ns.Show();
         }
+
+        private void bodegasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Lista ls = new Lista();
+            ls.MdiParent = this;
+            ls.Show();
+        }
     }
 }
