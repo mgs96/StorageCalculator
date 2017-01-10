@@ -13,9 +13,13 @@ namespace StorageCalculator
     public partial class StorageManager : Form
     {
 
-        public StorageManager()
+        Storage storage;
+
+        public StorageManager(Storage s)
         {
             InitializeComponent();
+
+            storage = s;
 
         }
 

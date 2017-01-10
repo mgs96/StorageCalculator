@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StorageCalculator
 {
-    [Serializable()]
+    
     public class Storage
     {
         private int linearMeterCapacity;
