@@ -1,0 +1,12 @@
+c:\users\dthpse15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\bin\Debug\StorageCalculator.exe.config
+c:\users\dthpse15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\bin\Debug\StorageCalculator.exe
+c:\users\dthpse15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\bin\Debug\StorageCalculator.pdb
+c:\users\dthpse15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.csprojResolveAssemblyReference.cache
+c:\users\dthpse15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.Form1.resources
+c:\users\dthpse15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.Properties.Resources.resources
+c:\users\dthpse15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.csproj.GenerateResource.Cache
+c:\users\dthpse15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.exe
+c:\users\dthpse15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.pdb
+C:\Users\DTHPSE15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.CreateStorage.resources
+C:\Users\DTHPSE15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.StorageManager.resources
+C:\Users\DTHPSE15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.EditStorage.resources
