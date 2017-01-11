@@ -15,6 +15,7 @@ namespace StorageCalculator
     {
 
         private string DBconnection;
+        private DataTable dt;
 
         public Lista()
         {
@@ -25,17 +26,17 @@ namespace StorageCalculator
 
         private void Lista_Load(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
 
             using (SqlConnection conn = new SqlConnection(DBconnection))
             {
-                SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Storage", conn);
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT name AS Nombre, totalCapacity AS [Capacidad Total], occupiedCapacity AS [Capacidad ocupada] FROM Storage", conn);
                 SqlCommandBuilder cmdbuilder = new SqlCommandBuilder(adapter);
                 DataTable table = new DataTable();
                 table.Locale = System.Globalization.CultureInfo.InvariantCulture;
                 adapter.Fill(table);
                 BindingSource bs = new BindingSource();
                 bs.DataSource = table;
+
 
                 DGVlista.AutoResizeColumns();
 

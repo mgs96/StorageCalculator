@@ -33,7 +33,9 @@
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarBodegaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DGVcajas = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVcajas)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -77,11 +79,24 @@
             this.editarBodegaToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
             this.editarBodegaToolStripMenuItem.Text = "Editar Bodega";
             // 
+            // DGVcajas
+            // 
+            this.DGVcajas.AllowUserToAddRows = false;
+            this.DGVcajas.AllowUserToDeleteRows = false;
+            this.DGVcajas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVcajas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DGVcajas.Location = new System.Drawing.Point(0, 24);
+            this.DGVcajas.Name = "DGVcajas";
+            this.DGVcajas.ReadOnly = true;
+            this.DGVcajas.Size = new System.Drawing.Size(380, 329);
+            this.DGVcajas.TabIndex = 1;
+            // 
             // StorageManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(380, 353);
+            this.Controls.Add(this.DGVcajas);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "StorageManager";
@@ -89,6 +104,7 @@
             this.Load += new System.EventHandler(this.StorageManager_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVcajas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -101,5 +117,6 @@
         private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cajaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarBodegaToolStripMenuItem;
+        private System.Windows.Forms.DataGridView DGVcajas;
     }
 }

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.BTNcrear = new System.Windows.Forms.Button();
-            this.TXTname = new System.Windows.Forms.TextBox();
+            this.TXTrotulo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TXTtipo = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.NUDmetrosLineales = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.NUDmetrosLineales)).BeginInit();
@@ -48,12 +48,12 @@
             this.BTNcrear.UseVisualStyleBackColor = true;
             this.BTNcrear.Click += new System.EventHandler(this.BTNcrear_Click);
             // 
-            // TXTname
+            // TXTrotulo
             // 
-            this.TXTname.Location = new System.Drawing.Point(59, 12);
-            this.TXTname.Name = "TXTname";
-            this.TXTname.Size = new System.Drawing.Size(143, 20);
-            this.TXTname.TabIndex = 7;
+            this.TXTrotulo.Location = new System.Drawing.Point(59, 12);
+            this.TXTrotulo.Name = "TXTrotulo";
+            this.TXTrotulo.Size = new System.Drawing.Size(143, 20);
+            this.TXTrotulo.TabIndex = 7;
             // 
             // label2
             // 
@@ -73,12 +73,12 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Tipo:";
             // 
-            // textBox1
+            // TXTtipo
             // 
-            this.textBox1.Location = new System.Drawing.Point(49, 47);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(153, 20);
-            this.textBox1.TabIndex = 9;
+            this.TXTtipo.Location = new System.Drawing.Point(49, 47);
+            this.TXTtipo.Name = "TXTtipo";
+            this.TXTtipo.Size = new System.Drawing.Size(153, 20);
+            this.TXTtipo.TabIndex = 9;
             // 
             // label3
             // 
@@ -113,9 +113,9 @@
             this.ClientSize = new System.Drawing.Size(214, 160);
             this.Controls.Add(this.NUDmetrosLineales);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TXTtipo);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.TXTname);
+            this.Controls.Add(this.TXTrotulo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.BTNcrear);
             this.Name = "CreateBox";
@@ -129,10 +129,10 @@
         #endregion
 
         private System.Windows.Forms.Button BTNcrear;
-        private System.Windows.Forms.TextBox TXTname;
+        private System.Windows.Forms.TextBox TXTrotulo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TXTtipo;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown NUDmetrosLineales;
     }
