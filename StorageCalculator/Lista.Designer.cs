@@ -41,14 +41,14 @@
             this.DGVlista.Location = new System.Drawing.Point(0, 0);
             this.DGVlista.Name = "DGVlista";
             this.DGVlista.ReadOnly = true;
-            this.DGVlista.Size = new System.Drawing.Size(288, 479);
+            this.DGVlista.Size = new System.Drawing.Size(344, 479);
             this.DGVlista.TabIndex = 0;
             // 
             // Lista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(288, 479);
+            this.ClientSize = new System.Drawing.Size(344, 479);
             this.Controls.Add(this.DGVlista);
             this.Name = "Lista";
             this.Text = "Lista";

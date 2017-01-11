@@ -32,5 +32,11 @@ namespace StorageCalculator
             dt.Columns.Add("Capacidad total");
 
         }
+
+        private void cajaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateBox cb = new CreateBox();
+            cb.Show();
+        }
     }
 }

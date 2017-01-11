@@ -71,6 +71,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Box.cs" />
+    <Compile Include="CreateBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateBox.Designer.cs">
+      <DependentUpon>CreateBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditStorage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,9 @@
     <Compile Include="StorageManager.Designer.cs">
       <DependentUpon>StorageManager.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CreateBox.resx">
+      <DependentUpon>CreateBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditStorage.resx">
       <DependentUpon>EditStorage.cs</DependentUpon>
     </EmbeddedResource>

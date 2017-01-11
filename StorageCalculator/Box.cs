@@ -12,11 +12,13 @@ namespace StorageCalculator
         private int linearMeter;
         private int squareMeter;
         private string label;
+        private string type;
 
-        public Box(int linealMeter)
+        public Box(int linealMeter, string label, string type)
         {
             this.linearMeter = linealMeter;
-            this.label = linealMeter.ToString();
+            this.label = label;
+            this.type = type;
         }
 
         public Box(int linealMeter, int squareMeter)
@@ -41,6 +43,12 @@ namespace StorageCalculator
         {
             get { return label; }
             set { label = value; }
+        }
+
+        public string Type
+        {
+            get { return type; }
+            set { type = value; }
         }
     }
 }

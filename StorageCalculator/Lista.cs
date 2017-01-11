@@ -14,7 +14,7 @@ namespace StorageCalculator
     public partial class Lista : Form
     {
 
-        string DBconnection;
+        private string DBconnection;
 
         public Lista()
         {
@@ -29,14 +29,17 @@ namespace StorageCalculator
 
             using (SqlConnection conn = new SqlConnection(DBconnection))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECET * FROM Storage", conn))
-                {
-                    conn.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        DGVlista.DataSource = reader;
-                    }
-                }
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM Storage", conn);
+                SqlCommandBuilder cmdbuilder = new SqlCommandBuilder(adapter);
+                DataTable table = new DataTable();
+                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+                adapter.Fill(table);
+                BindingSource bs = new BindingSource();
+                bs.DataSource = table;
+
+                DGVlista.AutoResizeColumns();
+
+                DGVlista.DataSource = bs;
             }
         }
     }
