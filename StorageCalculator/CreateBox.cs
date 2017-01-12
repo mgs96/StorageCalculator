@@ -15,7 +15,6 @@ namespace StorageCalculator
     {
 
         private string DBconnection;
-        private string name;
         private Storage_unit su;
         private Storage storage;
 
@@ -62,7 +61,7 @@ namespace StorageCalculator
             using (SqlConnection conn = new SqlConnection(DBconnection))
             {
 
-                SqlCommand cmd = new SqlCommand("INSERT INTO Unidad_Almacenamiento VALUES (@id, @cantidad, @tipo, @folios, @metroslineales, @storage_name)");
+                SqlCommand cmd = new SqlCommand("INSERT INTO Unidad_Almacenamiento VALUES (@id, @cantidad, @tipo, @folios, @metroslineales, @storage_id)");
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = conn;
                 cmd.Parameters.AddWithValue("@id", id);
@@ -70,7 +69,7 @@ namespace StorageCalculator
                 cmd.Parameters.AddWithValue("@tipo", tipo);
                 cmd.Parameters.AddWithValue("@folios", folios);
                 cmd.Parameters.AddWithValue("@metroslineales", mlineal);
-                cmd.Parameters.AddWithValue("@storage_name", name);
+                cmd.Parameters.AddWithValue("@storage_id", storage.Id);
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }

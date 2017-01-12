@@ -70,7 +70,7 @@
             this.nuevoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cajaToolStripMenuItem});
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.nuevoToolStripMenuItem.Text = "Nuevo";
             // 
             // cajaToolStripMenuItem
@@ -83,7 +83,7 @@
             // configuraciónToolStripMenuItem
             // 
             this.configuraciónToolStripMenuItem.Name = "configuraciónToolStripMenuItem";
-            this.configuraciónToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.configuraciónToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.configuraciónToolStripMenuItem.Text = "Configuración";
             // 
             // editarBodegaToolStripMenuItem
@@ -128,12 +128,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(58, 24);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(25, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(213, 29);
+            this.label1.Size = new System.Drawing.Size(300, 20);
             this.label1.TabIndex = 2;
-            this.label1.Text = "LISTA DE CAJAS";
+            this.label1.Text = "UNIDADES DE ALMACENAMIENTO";
             // 
             // pnlPie
             // 

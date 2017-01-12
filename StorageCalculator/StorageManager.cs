@@ -31,13 +31,15 @@ namespace StorageCalculator
         {
             using (SqlConnection conn = new SqlConnection(Utilities.Connection))
             {
-                DGVcajas.DataSource = Utilities.GetData("SELECT label AS Rótulo, linearMeter AS [Metros lineales ocupados], type AS Tipo FROM Box", conn);
+                DGVcajas.DataSource = Utilities.GetDataToSource("SELECT Id AS Identificador, Cantidad, Tipo AS Tipo, Folios as [Número de folios], Metros_lineales as [Metros lineales ocupados] FROM Unidad_Almacenamiento", conn);
             }
         }
 
         private void StorageManager_Load(object sender, EventArgs e)
         {
             updateBoxes();
+            total = storage.Capacidad_total;
+            ocupado = storage.Capacidad_ocupada;
             loadpieChart();
             //LoadBarChart();
         }
@@ -47,15 +49,16 @@ namespace StorageCalculator
             CreateBox cb = new CreateBox(storage);
             cb.ShowDialog();
             updateBoxes();
-
+            total = storage.Capacidad_total;
+            ocupado = storage.Capacidad_ocupada;
+            loadpieChart();
         }
 
         private void initChart()
         {
             this.components = new System.ComponentModel.Container();
             ChartArea chartArea1 = new ChartArea();
-            Legend legend1 = new Legend() { BackColor = Color.Green, ForeColor = Color.Black, Title = "Salary" };
-            Legend legend2 = new Legend() { BackColor = Color.Green, ForeColor = Color.Black, Title = "Salary" };
+            Legend legend1 = new Legend() { BackColor = Color.Green, ForeColor = Color.Black, Title = "Espacio de almacenamiento" };
             pieChart = new Chart();
 
             ((ISupportInitialize)(pieChart)).BeginInit();
@@ -73,7 +76,6 @@ namespace StorageCalculator
             //====Bar Chart
             chartArea1 = new ChartArea();
             chartArea1.Name = "BarChartArea";
-            legend2.Name = "Legend3";
 
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -87,7 +89,7 @@ namespace StorageCalculator
             pieChart.Series.Clear();
             pieChart.Palette = ChartColorPalette.Fire;
             pieChart.BackColor = Color.LightYellow;
-            pieChart.Titles.Add("Employee Salary");
+            pieChart.Titles.Add("Almacenamiento");
             pieChart.ChartAreas[0].BackColor = Color.Transparent;
             Series series1 = new Series
             {
@@ -101,11 +103,9 @@ namespace StorageCalculator
             series1.Points.Add(total/total);
             series1.Points.Add(ocupado/total);
             var p1 = series1.Points[0];
-            p1.AxisLabel = "70000";
-            p1.LegendText = "Hiren Khirsaria";
+            p1.LegendText = "Espacio disponible";
             var p2 = series1.Points[1];
-            p2.AxisLabel = "30000";
-            p2.LegendText = "ABC XYZ";
+            p2.LegendText = "Espacio ocupado";
             pieChart.Invalidate();
             pnlPie.Controls.Add(pieChart);
         }

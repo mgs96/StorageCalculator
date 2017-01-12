@@ -18,7 +18,7 @@ namespace StorageCalculator
             get { return connection; }
         }
 
-        public static BindingSource GetData(string query, SqlConnection conn)
+        public static BindingSource GetDataToSource(string query, SqlConnection conn)
         {
             SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
             SqlCommandBuilder cmdbuilder = new SqlCommandBuilder(adapter);

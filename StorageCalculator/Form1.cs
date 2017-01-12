@@ -8,16 +8,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.Data.SqlClient;
 
 namespace StorageCalculator
 {
     public partial class Form1 : Form
     {
 
+        private Storage st;
+        private List<Storage> storages;
+        private int total = 0;
+        private int ocupado = 0;
+
         public Form1()
         {
             InitializeComponent();
             initChart();
+            storages = new List<Storage>();
+            loadStorages();
         }
 
         Chart pieChart;
@@ -26,7 +34,9 @@ namespace StorageCalculator
         {
             CreateStorage ns = new CreateStorage();
             ns.ShowDialog();
-            loadpieChart();
+            loadStorages(); //Primero carga
+            loadpieChart(); //Luego dibuja
+            this.SendToBack();
         }
 
         private void bodegasToolStripMenuItem_Click(object sender, EventArgs e)
@@ -35,12 +45,36 @@ namespace StorageCalculator
             ls.Show();
         }
 
+        private void loadStorages()
+        {
+            using (SqlConnection con = new SqlConnection(Utilities.Connection))
+            {
+                con.Open();
+
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Storage", con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader != null)
+                        {
+                            while (reader.Read())
+                            {
+                                st = new Storage(reader["Id"].ToString(), reader["Nombre"].ToString(), (int)reader["CapacidadOcupada"], (int)reader["CapacidadTotal"], (int)reader["Ancho"], (int)reader["Largo"]);
+                                storages.Add(st);
+                                total += st.Capacidad_total;
+                                ocupado += st.Capacidad_ocupada;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private void initChart()
         {
             this.components = new System.ComponentModel.Container();
             ChartArea chartArea1 = new ChartArea();
             Legend legend1 = new Legend() { BackColor = Color.Green, ForeColor = Color.Black, Title = "Salary" };
-            Legend legend2 = new Legend() { BackColor = Color.Green, ForeColor = Color.Black, Title = "Salary" };
             pieChart = new Chart();
 
             ((ISupportInitialize)(pieChart)).BeginInit();
@@ -55,11 +89,6 @@ namespace StorageCalculator
             pieChart.Legends.Add(legend1);
             pieChart.Location = new System.Drawing.Point(0, 50);
 
-            //====Bar Chart
-            chartArea1 = new ChartArea();
-            chartArea1.Name = "BarChartArea";
-            legend2.Name = "Legend3";
-
             AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             //this.ClientSize = new System.Drawing.Size(284, 262);           
@@ -70,9 +99,9 @@ namespace StorageCalculator
         private void loadpieChart()
         {
             pieChart.Series.Clear();
-            pieChart.Palette = ChartColorPalette.Fire;
+            pieChart.Palette = ChartColorPalette.Pastel;
             pieChart.BackColor = Color.White;
-            pieChart.Titles.Add("Employee Salary");
+            pieChart.Titles.Add("Metros lineales");
             pieChart.ChartAreas[0].BackColor = Color.Transparent;
             Series series1 = new Series
             {
@@ -83,21 +112,20 @@ namespace StorageCalculator
             };
             pieChart.Series.Add(series1);
             //series.Points.Add controla el tamaño de la tajada, deben ser tamaños complementarios
-            series1.Points.Add(0.7);
-            series1.Points.Add(0.3);
+            series1.Points.Add((total - ocupado) / total);
             var p1 = series1.Points[0];
-            p1.AxisLabel = "70000";
-            p1.LegendText = "Hiren Khirsaria";
+            series1.Points.Add(ocupado / total);
             var p2 = series1.Points[1];
-            p2.AxisLabel = "30000";
-            p2.LegendText = "ABC XYZ";
+
+            if (ocupado != 0)
+            {
+                p1.AxisLabel = ((total - ocupado) / total) * 100 + "%";
+                p2.AxisLabel = (ocupado / total) * 100 + "%";
+            }
+            p1.LegendText = "Espacio Disponible";
+            p2.LegendText = "Espacio Ocupado";
             pieChart.Invalidate();
             pnlPie.Controls.Add(pieChart);
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
