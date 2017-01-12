@@ -9,58 +9,57 @@ namespace StorageCalculator
     
     public class Storage
     {
-        private int linearMeterCapacity;
-        private int squareMeterCapacity;
-        private int occupiedCapacity;
-        private string name;
-        private List<Box> boxes;
+        private string id;
+        private string nombre;
+        private int capacidad_ocupada;
+        private int capacidad_total;
+        private int largo;
+        private int ancho;
 
-        public Storage(string name, int linearMeterCapacity)
+        public Storage(string id, string nombre, int capacidad_ocupada, int capacidad_total, int largo, int ancho)
         {
-            this.name = name;
-            this.linearMeterCapacity = linearMeterCapacity;
-            this.occupiedCapacity = 0;
-            boxes = new List<Box>();
+            this.id = id;
+            this.nombre = nombre;
+            this.capacidad_ocupada = capacidad_ocupada;
+            this.capacidad_total = capacidad_total;
+            this.largo = largo;
+            this.ancho = ancho;
         }
 
-        public int LinearMeterCapacity
+        public string Id
         {
-            get { return linearMeterCapacity; }
-            set { linearMeterCapacity = value; }
+            get { return id; }
+            set { id = value; }
         }
 
-        public int SquareMeterCapacity
+        public string Nombre
         {
-            get { return squareMeterCapacity; }
-            set { squareMeterCapacity = value; }
+            get { return nombre; }
+            set { nombre = value; }
         }
 
-        public int OccupiedCapacity
+        public int Capacidad_ocupada
         {
-            get { return occupiedCapacity; }
-            set { occupiedCapacity = value; }
+            get { return capacidad_ocupada; }
+            set { capacidad_ocupada = value; }
         }
 
-        public string Name
+        public int Capacidad_total
         {
-            get { return name; }
-            set { name = value; }
+            get { return capacidad_total; }
+            set { capacidad_total = value; }
         }
 
-        public List<Box> Boxes
+        public int Largo
         {
-            get { return boxes; }
-            set { boxes = value; }
+            get { return largo; }
+            set { largo = value; }
         }
 
-        public void AddBox(Box b)
+        public int Ancho
         {
-            boxes.Add(b);
-        }
-
-        public Box ReturnBox(string label)
-        {
-            return boxes.Find(x => x.Label.Contains(label));
+            get { return ancho; }
+            set { ancho = value; }
         }
     }
 }

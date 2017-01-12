@@ -70,7 +70,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Box.cs" />
+    <Compile Include="Storage_unit.cs" />
     <Compile Include="CreateBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +110,7 @@
     <Compile Include="StorageManager.Designer.cs">
       <DependentUpon>StorageManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="CreateBox.resx">
       <DependentUpon>CreateBox.cs</DependentUpon>
     </EmbeddedResource>

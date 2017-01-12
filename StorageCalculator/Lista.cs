@@ -15,7 +15,7 @@ namespace StorageCalculator
     {
 
         private string DBconnection;
-        private DataTable dt;
+        //private DataTable dt;
 
         public Lista()
         {

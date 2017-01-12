@@ -13,20 +13,18 @@ namespace StorageCalculator
 {
     public partial class CreateStorage : Form
     {
-        private string DBconnection;
 
         public CreateStorage()
         {
             InitializeComponent();
-
-            DBconnection = System.Configuration.ConfigurationManager.ConnectionStrings["Local"].ConnectionString;
+            
         }
 
         private void BTNcrear_Click(object sender, EventArgs e)
         {
             Storage storage = new Storage(TXTname.Text, (int)NUDlinealCapacity.Value);
 
-            using (SqlConnection conn = new SqlConnection(DBconnection))
+            using (SqlConnection conn = new SqlConnection(Utilities.Connection))
             {
                 SqlCommand cmd = new SqlCommand("INSERT INTO Storage VALUES (@n, @totalC, @currentC)");
                 cmd.CommandType = CommandType.Text;
@@ -40,7 +38,6 @@ namespace StorageCalculator
 
             StorageManager m = new StorageManager(storage);
             m.Text = storage.Name;
-            m.MdiParent = this.MdiParent;
             m.Show();
             this.Close();
         }

@@ -16,36 +16,64 @@ namespace StorageCalculator
 
         private string DBconnection;
         private string name;
+        private Storage_unit su;
+        private Storage storage;
 
-        public CreateBox(String s)
+        public CreateBox(Storage s)
         {
             InitializeComponent();
 
-            name = s;
+            storage = s;
             DBconnection = System.Configuration.ConfigurationManager.ConnectionStrings["Local"].ConnectionString;
         }
 
         private void BTNcrear_Click(object sender, EventArgs e)
         {
-            
-            Box b = new Box((int)NUDmetrosLineales.Value, TXTrotulo.Text, TXTtipo.Text);
 
+            if ((TXTtipo1.Text != "") && (TXTid1.Text != "") && (storage.Capacidad_ocupada + NUDc1.Value <= storage.Capacidad_total))
+            {
+                su = new Storage_unit((int)NUDc1.Value, TXTtipo1.Text, TXTid1.Text, (int)NUDfolios1.Value, (int)NUDml1.Value);
+                addUnitsToDB((int)NUDc1.Value, TXTtipo1.Text, (int)NUDfolios1.Value, (int)NUDml1.Value, TXTid1.Text);
+            }
+
+            if ((TXTtipo2.Text != "") && (TXTid2.Text != "") && (storage.Capacidad_ocupada + NUDc2.Value <= storage.Capacidad_total))
+            {
+                su = new Storage_unit((int)NUDc2.Value, TXTtipo2.Text, TXTid1.Text, (int)NUDfolios2.Value, (int)NUDml2.Value);
+                addUnitsToDB((int)NUDc2.Value, TXTtipo2.Text, (int)NUDfolios2.Value, (int)NUDml2.Value, TXTid2.Text);
+            }
+
+            if ((TXTtipo3.Text != "") && (TXTid3.Text != "") && (storage.Capacidad_ocupada + NUDc3.Value <= storage.Capacidad_total))
+            {
+                su = new Storage_unit((int)NUDc3.Value, TXTtipo3.Text, TXTid3.Text, (int)NUDfolios3.Value, (int)NUDml3.Value);
+                addUnitsToDB((int)NUDc3.Value, TXTtipo3.Text, (int)NUDfolios3.Value, (int)NUDml3.Value, TXTid3.Text);
+            }
+
+            if ((TXTtipo4.Text != "") && (TXTid4.Text != "") && (storage.Capacidad_ocupada + NUDc4.Value <= storage.Capacidad_total))
+            {
+                su = new Storage_unit((int)NUDc4.Value, TXTtipo4.Text, TXTid4.Text, (int)NUDfolios4.Value, (int)NUDml4.Value);
+                addUnitsToDB((int)NUDc4.Value, TXTtipo4.Text, (int)NUDfolios4.Value, (int)NUDml4.Value, TXTid4.Text);
+            }
+
+            this.Close();
+        }
+
+        private void addUnitsToDB(int cantidad, string tipo, int folios, int mlineal, string id)
+        {
             using (SqlConnection conn = new SqlConnection(DBconnection))
             {
 
-                SqlCommand cmd = new SqlCommand("INSERT INTO Box VALUES (@label, @linearMeter, @squareMeter, @type, @storage_name)");
+                SqlCommand cmd = new SqlCommand("INSERT INTO Unidad_Almacenamiento VALUES (@id, @cantidad, @tipo, @folios, @metroslineales, @storage_name)");
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = conn;
-                cmd.Parameters.AddWithValue("@label", b.Label);
-                cmd.Parameters.AddWithValue("@linearMeter", b.LinealMeter);
-                cmd.Parameters.AddWithValue("@squareMeter", b.SquareMeter);
-                cmd.Parameters.AddWithValue("@type", b.Type);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                cmd.Parameters.AddWithValue("@tipo", tipo);
+                cmd.Parameters.AddWithValue("@folios", folios);
+                cmd.Parameters.AddWithValue("@metroslineales", mlineal);
                 cmd.Parameters.AddWithValue("@storage_name", name);
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
-
-            this.Close();
         }
     }
 }

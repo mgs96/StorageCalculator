@@ -16,37 +16,22 @@ namespace StorageCalculator
     {
 
         private Storage storage;
-        private DataTable table;
-        private string DBconnection;
-
+        private int ocupado;
+        private int total;
         Chart pieChart;
 
         public StorageManager(Storage s)
         {
             InitializeComponent();
             initChart();
-
             storage = s;
-
-            DBconnection = System.Configuration.ConfigurationManager.ConnectionStrings["Local"].ConnectionString;
-
         }
 
         private void updateBoxes()
         {
-            using (SqlConnection conn = new SqlConnection(DBconnection))
+            using (SqlConnection conn = new SqlConnection(Utilities.Connection))
             {
-                SqlDataAdapter adapter = new SqlDataAdapter("SELECT label AS Rótulo, linearMeter AS [Metros lineales ocupados], type AS Tipo FROM Box", conn);
-                SqlCommandBuilder cmdbuilder = new SqlCommandBuilder(adapter);
-                table = new DataTable();
-                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-                adapter.Fill(table);
-                BindingSource bs = new BindingSource();
-                bs.DataSource = table;
-
-                DGVcajas.AutoResizeColumns();
-
-                DGVcajas.DataSource = bs;
+                DGVcajas.DataSource = Utilities.GetData("SELECT label AS Rótulo, linearMeter AS [Metros lineales ocupados], type AS Tipo FROM Box", conn);
             }
         }
 
@@ -59,9 +44,10 @@ namespace StorageCalculator
 
         private void cajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateBox cb = new CreateBox(this.Text);
+            CreateBox cb = new CreateBox(storage);
             cb.ShowDialog();
             updateBoxes();
+
         }
 
         private void initChart()
@@ -112,8 +98,8 @@ namespace StorageCalculator
             };
             pieChart.Series.Add(series1);
             //series.Points.Add controla el tamaño de la tajada, deben ser tamaños complementarios
-            series1.Points.Add(storage.LinearMeterCapacity);
-            series1.Points.Add(0.3);
+            series1.Points.Add(total/total);
+            series1.Points.Add(ocupado/total);
             var p1 = series1.Points[0];
             p1.AxisLabel = "70000";
             p1.LegendText = "Hiren Khirsaria";
