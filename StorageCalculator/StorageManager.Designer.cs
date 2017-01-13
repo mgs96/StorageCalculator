@@ -35,11 +35,10 @@
             this.configuraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarBodegaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DGVcajas = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlPie = new System.Windows.Forms.Panel();
+            this.BTNborrar = new System.Windows.Forms.Button();
+            this.BTNactualizar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVcajas)).BeginInit();
             this.SuspendLayout();
@@ -97,33 +96,11 @@
             this.DGVcajas.AllowUserToAddRows = false;
             this.DGVcajas.AllowUserToDeleteRows = false;
             this.DGVcajas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVcajas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3});
             this.DGVcajas.Location = new System.Drawing.Point(0, 56);
             this.DGVcajas.Name = "DGVcajas";
             this.DGVcajas.ReadOnly = true;
             this.DGVcajas.Size = new System.Drawing.Size(344, 337);
             this.DGVcajas.TabIndex = 1;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Column2";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Column3";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
             // 
             // label1
             // 
@@ -142,11 +119,32 @@
             this.pnlPie.Size = new System.Drawing.Size(342, 337);
             this.pnlPie.TabIndex = 3;
             // 
+            // BTNborrar
+            // 
+            this.BTNborrar.Location = new System.Drawing.Point(199, 399);
+            this.BTNborrar.Name = "BTNborrar";
+            this.BTNborrar.Size = new System.Drawing.Size(75, 23);
+            this.BTNborrar.TabIndex = 4;
+            this.BTNborrar.Text = "Borrar";
+            this.BTNborrar.UseVisualStyleBackColor = true;
+            this.BTNborrar.Click += new System.EventHandler(this.BTNborrar_Click);
+            // 
+            // BTNactualizar
+            // 
+            this.BTNactualizar.Location = new System.Drawing.Point(72, 399);
+            this.BTNactualizar.Name = "BTNactualizar";
+            this.BTNactualizar.Size = new System.Drawing.Size(75, 23);
+            this.BTNactualizar.TabIndex = 5;
+            this.BTNactualizar.Text = "Actualizar";
+            this.BTNactualizar.UseVisualStyleBackColor = true;
+            // 
             // StorageManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 396);
+            this.ClientSize = new System.Drawing.Size(704, 430);
+            this.Controls.Add(this.BTNactualizar);
+            this.Controls.Add(this.BTNborrar);
             this.Controls.Add(this.pnlPie);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DGVcajas);
@@ -171,11 +169,10 @@
         private System.Windows.Forms.ToolStripMenuItem cajaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarBodegaToolStripMenuItem;
         private System.Windows.Forms.DataGridView DGVcajas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.ToolStripMenuItem configuraciónToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlPie;
+        private System.Windows.Forms.Button BTNborrar;
+        private System.Windows.Forms.Button BTNactualizar;
     }
 }

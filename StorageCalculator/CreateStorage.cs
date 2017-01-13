@@ -44,5 +44,10 @@ namespace StorageCalculator
             this.Close();
             m.Show();
         }
+
+        private void CreateStorage_Load(object sender, EventArgs e)
+        {
+            TXTidentificador.Focus();
+        }
     }
 }

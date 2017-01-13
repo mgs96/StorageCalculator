@@ -15,6 +15,7 @@ namespace StorageCalculator
     {
 
         private string DBconnection;
+        private List<Storage_unit> listU;
         private Storage_unit su;
         private Storage storage;
 
@@ -26,37 +27,58 @@ namespace StorageCalculator
             DBconnection = System.Configuration.ConfigurationManager.ConnectionStrings["Local"].ConnectionString;
         }
 
-        /*private void BTNcrear_Click(object sender, EventArgs e)
+        private bool verificar()
         {
+            bool sw = true;
 
-            if ((TXTtipo1.Text != "") && (TXTid1.Text != "") && (storage.Capacidad_ocupada + NUDc1.Value <= storage.Capacidad_total))
+            for (int i = 0; i < DGVsu.Rows.Count - 1; i++)
             {
-                su = new Storage_unit((int)NUDc1.Value, TXTtipo1.Text, TXTid1.Text, (int)NUDfolios1.Value, (int)NUDml1.Value);
-                addUnitsToDB((int)NUDc1.Value, TXTtipo1.Text, (int)NUDfolios1.Value, (int)NUDml1.Value, TXTid1.Text);
+                int cantidad = 0, folios = 0, mlineal = 0;
+
+                if (!(Int32.TryParse(DGVsu.Rows[i].Cells[0].Value.ToString(), out cantidad)))
+                {
+                    //MessageBox.Show("Digite una cantidad válida");
+                    RTXTlog.AppendText(Environment.NewLine + "Error en la linea " + (i + 1) + " el valor debe ser un número");
+                    sw = false;
+                }
+                if (!(Int32.TryParse(DGVsu.Rows[i].Cells[2].Value.ToString(), out folios)))
+                {
+                    //MessageBox.Show("Digite una cantidad válida");
+                    RTXTlog.AppendText(Environment.NewLine + "Error en la linea " + (i + 1) + " el valor debe ser un número");
+                    sw = false;
+                }
+                if (!(Int32.TryParse(DGVsu.Rows[i].Cells[3].Value.ToString(), out mlineal)))
+                {
+                    //MessageBox.Show("Digite una cantidad válida");
+                    RTXTlog.AppendText(Environment.NewLine + "Error en la linea " + (i + 1) + " el valor debe ser un número");
+                    sw = false;
+                }
             }
 
-            if ((TXTtipo2.Text != "") && (TXTid2.Text != "") && (storage.Capacidad_ocupada + NUDc2.Value <= storage.Capacidad_total))
+            return sw;
+        }
+
+        private void BTNcrear_Click(object sender, EventArgs e)
+        {
+            RTXTlog.Clear();
+
+            if (verificar())
             {
-                su = new Storage_unit((int)NUDc2.Value, TXTtipo2.Text, TXTid1.Text, (int)NUDfolios2.Value, (int)NUDml2.Value);
-                addUnitsToDB((int)NUDc2.Value, TXTtipo2.Text, (int)NUDfolios2.Value, (int)NUDml2.Value, TXTid2.Text);
+                for (int i = 0; i < DGVsu.Rows.Count - 1; i++)
+                {
+                    int cantidad = Int32.Parse(DGVsu.Rows[i].Cells[0].Value.ToString());
+                    string tipo = DGVsu.Rows[i].Cells[1].Value.ToString();
+                    int folios = Int32.Parse(DGVsu.Rows[i].Cells[2].Value.ToString());
+                    int mlineal = Int32.Parse(DGVsu.Rows[i].Cells[3].Value.ToString());
+                    string sigla = DGVsu.Rows[i].Cells[4].Value.ToString();
+
+                    su = new Storage_unit(cantidad, tipo, folios, mlineal, sigla);
+                    addUnitsToDB(su);
+                }
             }
+        }
 
-            if ((TXTtipo3.Text != "") && (TXTid3.Text != "") && (storage.Capacidad_ocupada + NUDc3.Value <= storage.Capacidad_total))
-            {
-                su = new Storage_unit((int)NUDc3.Value, TXTtipo3.Text, TXTid3.Text, (int)NUDfolios3.Value, (int)NUDml3.Value);
-                addUnitsToDB((int)NUDc3.Value, TXTtipo3.Text, (int)NUDfolios3.Value, (int)NUDml3.Value, TXTid3.Text);
-            }
-
-            if ((TXTtipo4.Text != "") && (TXTid4.Text != "") && (storage.Capacidad_ocupada + NUDc4.Value <= storage.Capacidad_total))
-            {
-                su = new Storage_unit((int)NUDc4.Value, TXTtipo4.Text, TXTid4.Text, (int)NUDfolios4.Value, (int)NUDml4.Value);
-                addUnitsToDB((int)NUDc4.Value, TXTtipo4.Text, (int)NUDfolios4.Value, (int)NUDml4.Value, TXTid4.Text);
-            }
-
-            this.Close();
-        }*/
-
-        private void addUnitsToDB(int cantidad, string tipo, int folios, int mlineal, string id)
+        private void addUnitsToDB(Storage_unit su)
         {
             using (SqlConnection conn = new SqlConnection(DBconnection))
             {
@@ -64,29 +86,24 @@ namespace StorageCalculator
                 SqlCommand cmd = new SqlCommand("INSERT INTO Unidad_Almacenamiento VALUES (@id, @cantidad, @tipo, @folios, @metroslineales, @storage_id)");
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = conn;
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.Parameters.AddWithValue("@cantidad", cantidad);
-                cmd.Parameters.AddWithValue("@tipo", tipo);
-                cmd.Parameters.AddWithValue("@folios", folios);
-                cmd.Parameters.AddWithValue("@metroslineales", mlineal);
+                cmd.Parameters.AddWithValue("@id", su.Id);
+                cmd.Parameters.AddWithValue("@cantidad", su.Cantidad);
+                cmd.Parameters.AddWithValue("@tipo", su.Tipo);
+                cmd.Parameters.AddWithValue("@folios", su.Folios);
+                cmd.Parameters.AddWithValue("@metroslineales", su.Mlineal);
                 cmd.Parameters.AddWithValue("@storage_id", storage.Id);
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void CreateBox_Load(object sender, EventArgs e)
         {
-            dataGridView1.Columns.Add("col1", "Cantidad");
-            dataGridView1.Columns.Add("col2", "Tipo");
-            dataGridView1.Columns.Add("col3", "Folios");
-            dataGridView1.Columns.Add("col4", "Metros lineales");
-            dataGridView1.Columns.Add("col5", "Siglas");
+            DGVsu.Columns.Add("col1", "Cantidad");
+            DGVsu.Columns.Add("col2", "Tipo");
+            DGVsu.Columns.Add("col3", "Folios");
+            DGVsu.Columns.Add("col4", "Metros lineales");
+            DGVsu.Columns.Add("col5", "Siglas");
         }
     }
 }

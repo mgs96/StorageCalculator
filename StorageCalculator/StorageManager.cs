@@ -18,11 +18,17 @@ namespace StorageCalculator
         private Storage storage;
         Chart pieChart;
 
+        private int ocupado = 0;
+        private int total = 0;
+
+
         public StorageManager(Storage s)
         {
             InitializeComponent();
             initChart();
             storage = s;
+
+            total = storage.Capacidad_total;
         }
 
         private void updateBoxes()
@@ -30,12 +36,32 @@ namespace StorageCalculator
             using (SqlConnection conn = new SqlConnection(Utilities.Connection))
             {
                 DGVcajas.DataSource = Utilities.GetDataToSource("SELECT Id AS Identificador, Cantidad, Tipo AS Tipo, Folios as [Número de folios], Metros_lineales as [Metros lineales ocupados] FROM Unidad_Almacenamiento", conn);
+
+                total = storage.Capacidad_total;
+                foreach (DataGridViewRow rows in DGVcajas.Rows)
+                {
+                    ocupado += Int32.Parse(rows.Cells[4].Value.ToString());
+                }
+            }
+        }
+
+        private void deleteBoxes(List<string> ls)
+        {
+
+            string list = "'"+String.Join(",", ls).Replace(",", "','") + "'";
+            using (SqlConnection conn = new SqlConnection(Utilities.Connection))
+            {
+                SqlCommand cmd = new SqlCommand("DELETE FROM Unidad_Almacenamiento WHERE Id IN (@list)", conn);
+                cmd.Parameters.AddWithValue("@list", list);
+                conn.Open();
+                MessageBox.Show(cmd.ExecuteNonQuery().ToString());
             }
         }
 
         private void StorageManager_Load(object sender, EventArgs e)
         {
             updateBoxes();
+            initChart();
             loadpieChart();
             //LoadBarChart();
         }
@@ -45,6 +71,7 @@ namespace StorageCalculator
             CreateBox cb = new CreateBox(storage);
             cb.ShowDialog();
             updateBoxes();
+            initChart();
             loadpieChart();
         }
 
@@ -94,14 +121,30 @@ namespace StorageCalculator
             };
             pieChart.Series.Add(series1);
             //series.Points.Add controla el tamaño de la tajada, deben ser tamaños complementarios
-            /*series1.Points.Add(storage.Capacidad_total);
-            series1.Points.Add(ocupado/total);*/
+            
+            series1.Points.Add(ocupado);
             var p1 = series1.Points[0];
-            p1.LegendText = "Espacio disponible";
+            series1.Points.Add(total - ocupado);
             var p2 = series1.Points[1];
+
+            p1.LegendText = "Espacio disponible";
             p2.LegendText = "Espacio ocupado";
             pieChart.Invalidate();
             pnlPie.Controls.Add(pieChart);
+        }
+
+        private void BTNborrar_Click(object sender, EventArgs e)
+        {
+            List<string> toerase = new List<string>();
+            foreach (DataGridViewRow item in DGVcajas.SelectedRows)
+            {
+                toerase.Add(item.Cells[0].Value.ToString());
+            }
+            deleteBoxes(toerase);
+            updateBoxes();
+            initChart();
+            loadpieChart();
+            
         }
 
         /*void LoadBarChart()

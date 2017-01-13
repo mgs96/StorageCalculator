@@ -112,16 +112,16 @@ namespace StorageCalculator
             };
             pieChart.Series.Add(series1);
             //series.Points.Add controla el tamaño de la tajada, deben ser tamaños complementarios
-            series1.Points.Add(/*(total - ocupado) / total*/3);
+            series1.Points.Add((total - ocupado) / total);
             var p1 = series1.Points[0];
-            series1.Points.Add(/*ocupado / total*/7);
+            series1.Points.Add(ocupado / total);
             var p2 = series1.Points[1];
 
-            /*if (ocupado != 0)
-            {*/
+            if (ocupado != 0)
+            {
                 p1.AxisLabel = ((total - ocupado) / total) * 100 + "%";
                 p2.AxisLabel = (ocupado / total) * 100 + "%";
-            //}
+            }
             p1.LegendText = "Espacio Disponible";
             p2.LegendText = "Espacio Ocupado";
             pieChart.Invalidate();

@@ -77,7 +77,7 @@
             this.TXTname.Location = new System.Drawing.Point(15, 64);
             this.TXTname.Name = "TXTname";
             this.TXTname.Size = new System.Drawing.Size(187, 20);
-            this.TXTname.TabIndex = 3;
+            this.TXTname.TabIndex = 2;
             // 
             // NUDlinealCapacity
             // 
@@ -94,7 +94,7 @@
             0});
             this.NUDlinealCapacity.Name = "NUDlinealCapacity";
             this.NUDlinealCapacity.Size = new System.Drawing.Size(187, 20);
-            this.NUDlinealCapacity.TabIndex = 4;
+            this.NUDlinealCapacity.TabIndex = 3;
             this.NUDlinealCapacity.Value = new decimal(new int[] {
             1,
             0,
@@ -106,7 +106,7 @@
             this.TXTidentificador.Location = new System.Drawing.Point(15, 25);
             this.TXTidentificador.Name = "TXTidentificador";
             this.TXTidentificador.Size = new System.Drawing.Size(187, 20);
-            this.TXTidentificador.TabIndex = 6;
+            this.TXTidentificador.TabIndex = 1;
             // 
             // label3
             // 
@@ -132,7 +132,7 @@
             0});
             this.NUDancho.Name = "NUDancho";
             this.NUDancho.Size = new System.Drawing.Size(187, 20);
-            this.NUDancho.TabIndex = 8;
+            this.NUDancho.TabIndex = 4;
             this.NUDancho.Value = new decimal(new int[] {
             1,
             0,
@@ -163,7 +163,7 @@
             0});
             this.NUDlargo.Name = "NUDlargo";
             this.NUDlargo.Size = new System.Drawing.Size(187, 20);
-            this.NUDlargo.TabIndex = 10;
+            this.NUDlargo.TabIndex = 5;
             this.NUDlargo.Value = new decimal(new int[] {
             1,
             0,
@@ -197,6 +197,7 @@
             this.Controls.Add(this.BTNcrear);
             this.Name = "CreateStorage";
             this.Text = "Nueva Bodega";
+            this.Load += new System.EventHandler(this.CreateStorage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.NUDlinealCapacity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUDancho)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUDlargo)).EndInit();

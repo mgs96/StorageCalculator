@@ -15,13 +15,13 @@ namespace StorageCalculator
         private int folios;
         private int mlineal;
 
-        public Storage_unit(int cantidad, string tipo, string id, int folios, int mlineal)
+        public Storage_unit(int cantidad, string tipo, int folios, int mlineal, string id)
         {
             this.cantidad = cantidad;
             this.tipo = tipo;
-            this.id = id;
-            this.folios = folios;
+            this.folios = folios;            
             this.mlineal = mlineal;
+            this.id = id;
         }
 
         public int Cantidad
@@ -53,7 +53,5 @@ namespace StorageCalculator
             get { return id; }
             set { id = value; }
         }
-
-
     }
 }
