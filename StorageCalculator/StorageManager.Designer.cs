@@ -38,7 +38,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlPie = new System.Windows.Forms.Panel();
             this.BTNborrar = new System.Windows.Forms.Button();
-            this.BTNactualizar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVcajas)).BeginInit();
             this.SuspendLayout();
@@ -121,7 +120,7 @@
             // 
             // BTNborrar
             // 
-            this.BTNborrar.Location = new System.Drawing.Point(199, 399);
+            this.BTNborrar.Location = new System.Drawing.Point(122, 399);
             this.BTNborrar.Name = "BTNborrar";
             this.BTNborrar.Size = new System.Drawing.Size(75, 23);
             this.BTNborrar.TabIndex = 4;
@@ -129,21 +128,11 @@
             this.BTNborrar.UseVisualStyleBackColor = true;
             this.BTNborrar.Click += new System.EventHandler(this.BTNborrar_Click);
             // 
-            // BTNactualizar
-            // 
-            this.BTNactualizar.Location = new System.Drawing.Point(72, 399);
-            this.BTNactualizar.Name = "BTNactualizar";
-            this.BTNactualizar.Size = new System.Drawing.Size(75, 23);
-            this.BTNactualizar.TabIndex = 5;
-            this.BTNactualizar.Text = "Actualizar";
-            this.BTNactualizar.UseVisualStyleBackColor = true;
-            // 
             // StorageManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 430);
-            this.Controls.Add(this.BTNactualizar);
             this.Controls.Add(this.BTNborrar);
             this.Controls.Add(this.pnlPie);
             this.Controls.Add(this.label1);
@@ -173,6 +162,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlPie;
         private System.Windows.Forms.Button BTNborrar;
-        private System.Windows.Forms.Button BTNactualizar;
     }
 }

@@ -48,7 +48,7 @@ namespace StorageCalculator
         private void deleteBoxes(List<string> ls)
         {
 
-            string list = "'"+String.Join(",", ls).Replace(",", "','") + "'";
+            string list = String.Join(",", ls);
             using (SqlConnection conn = new SqlConnection(Utilities.Connection))
             {
                 SqlCommand cmd = new SqlCommand("DELETE FROM Unidad_Almacenamiento WHERE Id IN (@list)", conn);

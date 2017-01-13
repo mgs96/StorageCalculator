@@ -30,6 +30,7 @@ namespace StorageCalculator
         private bool verificar()
         {
             bool sw = true;
+            int total = 0;
 
             for (int i = 0; i < DGVsu.Rows.Count - 1; i++)
             {
@@ -41,18 +42,42 @@ namespace StorageCalculator
                     RTXTlog.AppendText(Environment.NewLine + "Error en la linea " + (i + 1) + " el valor debe ser un número");
                     sw = false;
                 }
+
+                if (Convert.ToString(DGVsu.Rows[i].Cells[1].Value).Equals(""))
+                {
+                    RTXTlog.AppendText(Environment.NewLine + "Error en la linea " + (i + 1) + " debe digitar un valor");
+                    sw = false;
+                }
+                
                 if (!(Int32.TryParse(DGVsu.Rows[i].Cells[2].Value.ToString(), out folios)))
                 {
                     //MessageBox.Show("Digite una cantidad válida");
                     RTXTlog.AppendText(Environment.NewLine + "Error en la linea " + (i + 1) + " el valor debe ser un número");
                     sw = false;
                 }
+
                 if (!(Int32.TryParse(DGVsu.Rows[i].Cells[3].Value.ToString(), out mlineal)))
                 {
                     //MessageBox.Show("Digite una cantidad válida");
                     RTXTlog.AppendText(Environment.NewLine + "Error en la linea " + (i + 1) + " el valor debe ser un número");
                     sw = false;
                 }
+                else
+                {
+                    total += mlineal;
+                }
+
+                if (Convert.ToString(DGVsu.Rows[i].Cells[4].Value).Equals(""))
+                {
+                    RTXTlog.AppendText(Environment.NewLine + "Error en la linea " + (i + 1) + " debe digitar un valor");
+                    sw = false;
+                }
+            }
+
+            if (total > storage.Capacidad_total)
+            {
+                sw = false;
+                RTXTlog.AppendText(Environment.NewLine + "Las unidades de almacenaiento a crear exceden el tamaño de la bodega");
             }
 
             return sw;
