@@ -26,7 +26,7 @@ namespace StorageCalculator
             DBconnection = System.Configuration.ConfigurationManager.ConnectionStrings["Local"].ConnectionString;
         }
 
-        private void BTNcrear_Click(object sender, EventArgs e)
+        /*private void BTNcrear_Click(object sender, EventArgs e)
         {
 
             if ((TXTtipo1.Text != "") && (TXTid1.Text != "") && (storage.Capacidad_ocupada + NUDc1.Value <= storage.Capacidad_total))
@@ -54,7 +54,7 @@ namespace StorageCalculator
             }
 
             this.Close();
-        }
+        }*/
 
         private void addUnitsToDB(int cantidad, string tipo, int folios, int mlineal, string id)
         {
@@ -73,6 +73,20 @@ namespace StorageCalculator
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CreateBox_Load(object sender, EventArgs e)
+        {
+            dataGridView1.Columns.Add("col1", "Cantidad");
+            dataGridView1.Columns.Add("col2", "Tipo");
+            dataGridView1.Columns.Add("col3", "Folios");
+            dataGridView1.Columns.Add("col4", "Metros lineales");
+            dataGridView1.Columns.Add("col5", "Siglas");
         }
     }
 }

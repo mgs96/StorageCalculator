@@ -16,8 +16,6 @@ namespace StorageCalculator
     {
 
         private Storage storage;
-        private int ocupado;
-        private int total;
         Chart pieChart;
 
         public StorageManager(Storage s)
@@ -38,8 +36,6 @@ namespace StorageCalculator
         private void StorageManager_Load(object sender, EventArgs e)
         {
             updateBoxes();
-            total = storage.Capacidad_total;
-            ocupado = storage.Capacidad_ocupada;
             loadpieChart();
             //LoadBarChart();
         }
@@ -49,8 +45,6 @@ namespace StorageCalculator
             CreateBox cb = new CreateBox(storage);
             cb.ShowDialog();
             updateBoxes();
-            total = storage.Capacidad_total;
-            ocupado = storage.Capacidad_ocupada;
             loadpieChart();
         }
 
@@ -100,8 +94,8 @@ namespace StorageCalculator
             };
             pieChart.Series.Add(series1);
             //series.Points.Add controla el tamaño de la tajada, deben ser tamaños complementarios
-            series1.Points.Add(total/total);
-            series1.Points.Add(ocupado/total);
+            /*series1.Points.Add(storage.Capacidad_total);
+            series1.Points.Add(ocupado/total);*/
             var p1 = series1.Points[0];
             p1.LegendText = "Espacio disponible";
             var p2 = series1.Points[1];
