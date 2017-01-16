@@ -14,3 +14,4 @@ C:\Users\DTHPSE15\documents\visual studio 2013\Projects\StorageCalculator\Storag
 C:\Users\DTHPSE15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\bin\Debug\Local_log.ldf
 C:\Users\DTHPSE15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.Lista.resources
 C:\Users\DTHPSE15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.CreateBox.resources
+C:\Users\DTHPSE15\documents\visual studio 2013\Projects\StorageCalculator\StorageCalculator\obj\Debug\StorageCalculator.Addunit.resources

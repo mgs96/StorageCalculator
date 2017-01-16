@@ -70,6 +70,12 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Addunit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Addunit.Designer.cs">
+      <DependentUpon>Addunit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Storage_unit.cs" />
     <Compile Include="CreateBox.cs">
       <SubType>Form</SubType>
@@ -111,6 +117,9 @@
       <DependentUpon>StorageManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities.cs" />
+    <EmbeddedResource Include="Addunit.resx">
+      <DependentUpon>Addunit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreateBox.resx">
       <DependentUpon>CreateBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -131,6 +140,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="CreateStorage.resx">
       <DependentUpon>CreateStorage.cs</DependentUpon>
@@ -152,6 +162,24 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Images\Bad.png" />
+    <None Include="Images\barcode.png" />
+    <None Include="Images\Conn.png" />
+    <None Include="Images\Correspondence.png" />
+    <None Include="Images\Exit.png" />
+    <None Include="Images\Good.png" />
+    <None Include="Images\Help.png" />
+    <None Include="Images\Invoice.png" />
+    <None Include="Images\Left_Arrow.png" />
+    <None Include="Images\Locked.png" />
+    <None Include="Images\Log.png" />
+    <None Include="Images\Manage.png" />
+    <None Include="Images\OK.png" />
+    <None Include="Images\Right_Arrow.png" />
+    <None Include="Images\Settings.png" />
+    <None Include="Images\Unlocked.png" />
+    <None Include="Images\plus.png" />
+    <None Include="Images\plus.jpg" />
     <Content Include="Local.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

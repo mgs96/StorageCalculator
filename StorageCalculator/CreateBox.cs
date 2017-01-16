@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace StorageCalculator
 {
@@ -15,7 +16,6 @@ namespace StorageCalculator
     {
 
         private string DBconnection;
-        private List<Storage_unit> listU;
         private Storage_unit su;
         private Storage storage;
 
@@ -30,54 +30,36 @@ namespace StorageCalculator
         private bool verificar()
         {
             bool sw = true;
-            int total = 0;
+            int folios, mlineal;
 
             for (int i = 0; i < DGVsu.Rows.Count - 1; i++)
             {
-                int cantidad = 0, folios = 0, mlineal = 0;
 
-                if (!(Int32.TryParse(DGVsu.Rows[i].Cells[0].Value.ToString(), out cantidad)))
-                {
-                    //MessageBox.Show("Digite una cantidad válida");
-                    RTXTlog.AppendText(Environment.NewLine + "Error en la linea " + (i + 1) + " el valor debe ser un número");
-                    sw = false;
-                }
-
-                if (Convert.ToString(DGVsu.Rows[i].Cells[1].Value).Equals(""))
+                if (Convert.ToString(DGVsu.Rows[i].Cells[0].Value).Equals(""))
                 {
                     RTXTlog.AppendText(Environment.NewLine + "Error en la linea " + (i + 1) + " debe digitar un valor");
                     sw = false;
                 }
-                
-                if (!(Int32.TryParse(DGVsu.Rows[i].Cells[2].Value.ToString(), out folios)))
+
+                if (!(Int32.TryParse(DGVsu.Rows[i].Cells[1].Value.ToString(), out folios)))
                 {
                     //MessageBox.Show("Digite una cantidad válida");
                     RTXTlog.AppendText(Environment.NewLine + "Error en la linea " + (i + 1) + " el valor debe ser un número");
                     sw = false;
                 }
 
-                if (!(Int32.TryParse(DGVsu.Rows[i].Cells[3].Value.ToString(), out mlineal)))
+                if (!(Int32.TryParse(DGVsu.Rows[i].Cells[2].Value.ToString(), out mlineal)))
                 {
                     //MessageBox.Show("Digite una cantidad válida");
                     RTXTlog.AppendText(Environment.NewLine + "Error en la linea " + (i + 1) + " el valor debe ser un número");
                     sw = false;
                 }
-                else
-                {
-                    total += mlineal;
-                }
 
-                if (Convert.ToString(DGVsu.Rows[i].Cells[4].Value).Equals(""))
+                if (Convert.ToString(DGVsu.Rows[i].Cells[3].Value).Equals(""))
                 {
                     RTXTlog.AppendText(Environment.NewLine + "Error en la linea " + (i + 1) + " debe digitar un valor");
                     sw = false;
                 }
-            }
-
-            if (total > storage.Capacidad_total)
-            {
-                sw = false;
-                RTXTlog.AppendText(Environment.NewLine + "Las unidades de almacenaiento a crear exceden el tamaño de la bodega");
             }
 
             return sw;
@@ -85,38 +67,82 @@ namespace StorageCalculator
 
         private void BTNcrear_Click(object sender, EventArgs e)
         {
+
+            try
+            {
+
+                var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var settings = config.AppSettings.Settings;
+
+                if (settings["Nombre"] == null)
+                {
+                    settings.Add("Nombre",TXTnombre.Text);
+                }
+                else
+                {
+                    settings["Nombre"].Value = TXTnombre.Text;
+                }
+
+                if (settings["NIT"] == null)
+                {
+                    settings.Add("Nit",TXTnombre.Text);
+                }
+                else
+                {
+                    settings["NIT"].Value = TXTnombre.Text;
+                }
+
+                if (settings["Folios"] == null)
+                {
+                    settings.Add("Folios", NUDfolios.Value.ToString());
+                }
+                else
+                {
+                    settings["Folios"].Value = NUDfolios.Value.ToString();
+                }
+
+                config.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(config.AppSettings.SectionInformation.Name);
+
+            }
+            catch(ConfigurationErrorsException)
+            {
+                MessageBox.Show("Error al guardar la configuración de la empresa");
+            }
+
+            // Save the changes in App.config file.
+
+            // Force a reload of a changed section.
+            //ConfigurationManager.RefreshSection("appSettings");
+
             RTXTlog.Clear();
 
             if (verificar())
             {
                 for (int i = 0; i < DGVsu.Rows.Count - 1; i++)
                 {
-                    int cantidad = Int32.Parse(DGVsu.Rows[i].Cells[0].Value.ToString());
-                    string tipo = DGVsu.Rows[i].Cells[1].Value.ToString();
-                    int folios = Int32.Parse(DGVsu.Rows[i].Cells[2].Value.ToString());
-                    int mlineal = Int32.Parse(DGVsu.Rows[i].Cells[3].Value.ToString());
-                    string sigla = DGVsu.Rows[i].Cells[4].Value.ToString();
+                    string tipo = DGVsu.Rows[i].Cells[0].Value.ToString();
+                    int folios = Int32.Parse(DGVsu.Rows[i].Cells[1].Value.ToString());
+                    int mlineal = Int32.Parse(DGVsu.Rows[i].Cells[2].Value.ToString());
+                    string sigla = DGVsu.Rows[i].Cells[3].Value.ToString();
 
-                    su = new Storage_unit(cantidad, tipo, folios, mlineal, sigla, storage.Id);
-                    addUnitsToDB(su);
+                    addUnitsToDB(tipo, folios, mlineal, sigla);
                 }
             }
         }
 
-        private void addUnitsToDB(Storage_unit su)
+        private void addUnitsToDB(string tipo, int folios, int mlineal, string sigla)
         {
             using (SqlConnection conn = new SqlConnection(DBconnection))
             {
 
-                SqlCommand cmd = new SqlCommand("INSERT INTO Unidad_Almacenamiento VALUES (@id, @cantidad, @tipo, @folios, @metroslineales, @storage_id)");
+                SqlCommand cmd = new SqlCommand("INSERT INTO Unidad_Almacenamiento VALUES (@tipo, @folios, @metroslineales, @identificador)");
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = conn;
-                cmd.Parameters.AddWithValue("@id", su.Id);
-                cmd.Parameters.AddWithValue("@cantidad", su.Cantidad);
-                cmd.Parameters.AddWithValue("@tipo", su.Tipo);
-                cmd.Parameters.AddWithValue("@folios", su.Folios);
-                cmd.Parameters.AddWithValue("@metroslineales", su.Mlineal);
-                cmd.Parameters.AddWithValue("@storage_id", storage.Id);
+                cmd.Parameters.AddWithValue("@tipo", tipo);
+                cmd.Parameters.AddWithValue("@folios", folios);
+                cmd.Parameters.AddWithValue("@metroslineales", mlineal);
+                cmd.Parameters.AddWithValue("@identificador", sigla);
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
@@ -124,11 +150,47 @@ namespace StorageCalculator
 
         private void CreateBox_Load(object sender, EventArgs e)
         {
-            DGVsu.Columns.Add("col1", "Cantidad");
-            DGVsu.Columns.Add("col2", "Tipo");
-            DGVsu.Columns.Add("col3", "Folios");
-            DGVsu.Columns.Add("col4", "Metros lineales");
-            DGVsu.Columns.Add("col5", "Siglas");
+            using (SqlConnection conn = new SqlConnection(Utilities.Connection))
+            {
+                DataTable table = new DataTable();
+                SqlCommand cmd = new SqlCommand("SELECT Tipo, Folios, Metros_lineales, Identificador FROM Unidad_Almacenamiento", conn);
+                conn.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader != null)
+                    {
+                        table.Load(reader);
+                    }
+                }
+
+                DGVsu.DataSource = table;
+            }
+
+            try
+            {
+
+                var settings = ConfigurationManager.AppSettings;
+
+                if (settings["Nombre"] != null)
+                {
+                    TXTnombre.Text = settings["Nombre"];
+                }
+
+                if (settings["NIT"] != null)
+                {
+                    TXTnit.Text = settings["NIT"];
+                }
+
+                if (settings["Folios"] != null)
+                {
+                    NUDfolios.Value = Convert.ToDecimal(settings["Folios"]);
+                }
+
+            }
+            catch (ConfigurationErrorsException)
+            {
+                MessageBox.Show("Error al leer la configuración");
+            }
         }
     }
 }

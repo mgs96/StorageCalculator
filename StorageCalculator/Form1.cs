@@ -127,5 +127,11 @@ namespace StorageCalculator
             pieChart.Invalidate();
             pnlPie.Controls.Add(pieChart);
         }
+
+        private void configuracionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateBox cb = new CreateBox(null);
+            cb.ShowDialog();
+        }
     }
 }

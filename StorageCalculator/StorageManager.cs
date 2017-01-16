@@ -39,6 +39,7 @@ namespace StorageCalculator
                 SqlCommand cmd = new SqlCommand("SELECT Id, Cantidad, Tipo, Folios, Metros_lineales FROM Unidad_Almacenamiento WHERE Storage_Id = @id", conn);
                 cmd.Parameters.AddWithValue("@id", storage.Id);
                 conn.Open();
+
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader != null)
@@ -80,8 +81,8 @@ namespace StorageCalculator
 
         private void cajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateBox cb = new CreateBox(storage);
-            cb.ShowDialog();
+            Addunit au = new Addunit();
+            au.ShowDialog();
             updateBoxes();
             initChart();
             loadpieChart();
