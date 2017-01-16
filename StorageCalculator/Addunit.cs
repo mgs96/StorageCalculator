@@ -24,7 +24,7 @@ namespace StorageCalculator
             {
 
                 DataTable t = new DataTable();
-                SqlCommand cmd = new SqlCommand("SELECT Tipo FROM Unidad_Almacenamiento", conn);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Unidad_Almacenamiento", conn);
                 conn.Open();
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -37,6 +37,27 @@ namespace StorageCalculator
                     CMBtipo.DataSource = t;
 
                 }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(Utilities.Connection))
+            {
+
+                /*SqlCommand cmd = new SqlCommand("INSERT INTO ", conn);
+                conn.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader != null)
+                    {
+                        t.Load(reader);
+                    }
+
+                    CMBtipo.DataSource = t;
+
+                }*/
             }
         }
     }

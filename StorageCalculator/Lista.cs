@@ -29,7 +29,7 @@ namespace StorageCalculator
 
             using (SqlConnection conn = new SqlConnection(DBconnection))
             {
-                SqlDataAdapter adapter = new SqlDataAdapter("SELECT name AS Nombre, totalCapacity AS [Capacidad Total], occupiedCapacity AS [Capacidad ocupada] FROM Storage", conn);
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT Nombre, CapacidadOcupada as [Capacidad ocupada], CapacidadTotal as [Capacidad total], Largo, Ancho, Identificador", conn);
                 SqlCommandBuilder cmdbuilder = new SqlCommandBuilder(adapter);
                 DataTable table = new DataTable();
                 table.Locale = System.Globalization.CultureInfo.InvariantCulture;
