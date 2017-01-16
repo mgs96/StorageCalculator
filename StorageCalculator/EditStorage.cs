@@ -16,5 +16,10 @@ namespace StorageCalculator
         {
             InitializeComponent();
         }
+
+        private void BTNguardar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

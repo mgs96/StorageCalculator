@@ -17,17 +17,5 @@ namespace StorageCalculator
         {
             get { return connection; }
         }
-
-        public static BindingSource GetDataToSource(string query, SqlConnection conn)
-        {
-            SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
-            SqlCommandBuilder cmdbuilder = new SqlCommandBuilder(adapter);
-            DataTable table = new DataTable();
-            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            adapter.Fill(table);
-            BindingSource bs = new BindingSource();
-            bs.DataSource = table;
-            return bs;
-        }
     }
 }

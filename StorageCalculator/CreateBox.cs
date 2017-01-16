@@ -97,7 +97,7 @@ namespace StorageCalculator
                     int mlineal = Int32.Parse(DGVsu.Rows[i].Cells[3].Value.ToString());
                     string sigla = DGVsu.Rows[i].Cells[4].Value.ToString();
 
-                    su = new Storage_unit(cantidad, tipo, folios, mlineal, sigla);
+                    su = new Storage_unit(cantidad, tipo, folios, mlineal, sigla, storage.Id);
                     addUnitsToDB(su);
                 }
             }

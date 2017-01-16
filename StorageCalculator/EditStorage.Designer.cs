@@ -86,6 +86,7 @@
             this.BTNguardar.TabIndex = 5;
             this.BTNguardar.Text = "Guardar";
             this.BTNguardar.UseVisualStyleBackColor = true;
+            this.BTNguardar.Click += new System.EventHandler(this.BTNguardar_Click);
             // 
             // EditStorage
             // 

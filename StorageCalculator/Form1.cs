@@ -17,7 +17,7 @@ namespace StorageCalculator
 
         private Storage st;
         private List<Storage> storages;
-        private int total = 0;
+        private int total = 1;
         private int ocupado = 0;
 
         public Form1()
@@ -42,7 +42,7 @@ namespace StorageCalculator
         private void bodegasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Lista ls = new Lista();
-            ls.Show();
+            ls.ShowDialog();
         }
 
         private void loadStorages()

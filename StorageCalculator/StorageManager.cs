@@ -35,7 +35,19 @@ namespace StorageCalculator
         {
             using (SqlConnection conn = new SqlConnection(Utilities.Connection))
             {
-                DGVcajas.DataSource = Utilities.GetDataToSource("SELECT Id AS Identificador, Cantidad, Tipo AS Tipo, Folios as [Número de folios], Metros_lineales as [Metros lineales ocupados] FROM Unidad_Almacenamiento", conn);
+                DataTable table = new DataTable();
+                SqlCommand cmd = new SqlCommand("SELECT Id, Cantidad, Tipo, Folios, Metros_lineales FROM Unidad_Almacenamiento WHERE Storage_Id = @id", conn);
+                cmd.Parameters.AddWithValue("@id", storage.Id);
+                conn.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader != null)
+                    {
+                        table.Load(reader);
+                    }
+                }
+
+                DGVcajas.DataSource = table;
 
                 total = storage.Capacidad_total;
                 foreach (DataGridViewRow rows in DGVcajas.Rows)
@@ -144,7 +156,6 @@ namespace StorageCalculator
             updateBoxes();
             initChart();
             loadpieChart();
-            
         }
 
         /*void LoadBarChart()
